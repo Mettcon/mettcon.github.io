@@ -75,6 +75,7 @@ preview:
     automaticallyShowPreview: false
 publishing:
     siteUrl: https://mettcon.github.io
+    assetsPrefix: /mettcon.github.io
     enableFMTitle: true
     enableNoteTitleForLink: true
     enableMermaid: true
