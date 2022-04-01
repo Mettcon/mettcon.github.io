@@ -1,20 +1,20 @@
 ---
 id: 2ajryvqow43elplox2nvgt0
-title: Root
+title: Hello Visitor
 desc: ''
 updated: 1648766726999
 created: 1648766726999
 ---
-# Welcome to Dendron
+# Stay a while and listen
 
-This is the root of your dendron vault. If you decide to publish your entire vault, this will be your landing page. You are free to customize any part of this page except the frontmatter on top.
+First of all my most important skill: Petting pets  
+[[Find more about me in my spectacular CV|CV]]
 
 ## Lookup
 
 This section contains useful links to related resources.
 
-- [Getting Started Guide](https://link.dendron.so/6b25)
-- [Discord](https://link.dendron.so/6b23)
-- [Home Page](https://wiki.dendron.so/)
-- [Github](https://link.dendron.so/6b24)
-- [Developer Docs](https://docs.dendron.so/)
+- [Github](https://github.com/Mettcon)
+- Discord: Saine#4136
+
+
