@@ -2,28 +2,24 @@
 id: 2ajryvqow43elplox2nvgt0
 title: Hello Visitor
 desc: ''
-updated: 1648766726999
+updated: 1651338700435
 created: 1648766726999
 ---
 # Stay a while and listen
+First of all my most important skill: Petting pets
 
-First of all my most important skill: Petting pets  
+Awesome, right? Even better, you can hire me. But don't get too excited yet.
+I may have not seen much of the IT Industry, but what I've seen so far was frustrating.
+I want a place and colleagues from which I can learn at the job. And don't have to learn besides.
+I want to work with people who are interested and don't reject everything with "I don't have time for that"
+I'm sick of wasting my time Google bungling, because no one has a clue what we're doing and is stuck in ancient Times.
+
+
+
+
 [[Find more about me in my spectacular CV|CV]]
 
-## Empfehlungen
-### Bücher
-Phönix Project  
-Shell of an idea
 
-### Talks
-[Art of Code](https://www.youtube.com/watch?v=6avJHaC3C2U)  
-
-[Dylan Beattie — Life, liberty and the pursuit of APIness: the secret to happy code](https://www.youtube.com/watch?v=gJW7XqVx-qE)  
-
-[DEFCON 19: Steal Everything, Kill Everyone, Cause Total Financial Ruin! (w speaker)](https://www.youtube.com/watch?v=JsVtHqICeKE)
-
-### verschiedenes
-[Don't Copy Code](https://twitter.com/foone/status/1229641258370355200)
 
 ## Lookup
 
