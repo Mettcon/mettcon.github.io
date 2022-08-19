@@ -2,7 +2,7 @@
 id: kmodkqrr8soyq59b5twkopo
 title: Recommendations
 desc: ''
-updated: 1660898949124
+updated: 1660900011229
 created: 1651332275798
 ---
 
@@ -20,7 +20,7 @@ Be the Master (Not the Alpha Macho Master Bullshit. The Master of his Craft. It'
 
 [Manifesto for Agile Software Development](https://agilemanifesto.org/principles.html)
 [Release Pipeline Model](https://download.microsoft.com/download/C/4/A/C4A14099-FEA4-4CB3-8A8F-A0C2BE5A1219/The%20Release%20Pipeline%20Model.pdf)  
-[Velocity 09:  John Allspaw and Paul Hammond, "10+ Deploys Pe](https://www.youtube.com/watch?v=LdOe18KhtT4)
+
 
 
 
@@ -28,7 +28,7 @@ Be the Master (Not the Alpha Macho Master Bullshit. The Master of his Craft. It'
 
 [DEFCON 19: Steal Everything, Kill Everyone, Cause Total Financial Ruin! (w speaker)](https://www.youtube.com/watch?v=JsVtHqICeKE)  
 [The Art of Code - Dylan Beattie](https://www.youtube.com/watch?v=6avJHaC3C2U)  
-
+[Velocity 09:  John Allspaw and Paul Hammond, "10+ Deploys Pe](https://www.youtube.com/watch?v=LdOe18KhtT4)
 
 
 ### verschiedenes
