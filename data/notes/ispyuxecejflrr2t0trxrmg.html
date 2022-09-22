@@ -1,0 +1,16 @@
+<h1 id="powershell"><a aria-hidden="true" class="anchor-heading" href="#powershell"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>powershell</h1>
+<h2 id="internal-optimization"><a aria-hidden="true" class="anchor-heading" href="#internal-optimization"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>internal optimization</h2>
+<p>Es kam mal wieder das Thema <code>$array += $something</code> auf. Inzwischen sollte weitgehend bekannt sein, dass es böse ist. Es steht sogar im Handbuch.
+<a href="https://learn.microsoft.com/en-us/powershell/scripting/dev-cross-plat/performance/script-authoring-considerations?view=powershell-7.2#array-addition">Aufklärung</a><br>
+Kurze Erklärung:<br>
+Arrays sind Immutable (unveränderbar). Also wird in jeder Runde aus dem Array und dem hinzuzufügendem Objekt ein neues Array erstellt.
+Interaktiv mit einer Handvoll Objekten fällt das kaum ins Gewicht, bei mehr Objekten wird es aber schnell problematisch.<br>
+(Ausserdem zeigt es mangelndes Verständnis darüber wie Powershell funktionert. Nutzt die Pipeline )</p>
+<p>Zum Thema:
+Die Benchmarks wurden mit <code>Measure-Command { &#x3C;# code to Bench #> }</code> gemacht und ich erinnerte mich an einen Kommentar von <a href="https://github.com/SeeminglyScience">SeeminglyScience</a> dass in dem Test die Optimierung fehlt. Die Lösung ist es den zu testenden Code in einen Scriptblock zu packen. <code>Measure-Command { { &#x3C;# code to Bench #>} }</code><br>
+Ein paar Fehlversuche später habe ich noch mal nachgefragt und <a href="https://gist.github.com/Mettcon/0e333fde41345e1e875289bf4828995a">diese Benchmarks</a> () brachten das erwartete Ergebnis.<br>
+Die Optimierungen betreffen also hauptsächlich Variablen in fremden Scopes. Daher die übergaben. <code>{ $emptyArray = $emptyArray; $Iterations = $Iterations;...}</code>  </p>
+<p>Unoptimiert wird jeder Variablenzugriff mit <code>VariableOps.GetVariableValue</code> durchgeführt. Womit die Variablen über mehrere Scopes gesucht werden.<br>
+Eine lokale Variable stattdessen ist nur ein Property Zugriff einer internen Klasse.<br>
+Meine große Erkenntnis hier war, dass das nicht nur für <code>Measure-Command</code> gilt, sondern für Powershell generell.<br>
+Der Performance Gewinn der Optimisierung wird fast immer nur marginal sein, aber es ist Performance for free, wenn man sich an guten Stil hält, überraschungen vermeidet und evtl. sogar Schwierigkeiten mit dem Strictmode vermeidet. </p>

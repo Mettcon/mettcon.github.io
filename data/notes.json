@@ -1,0 +1,279 @@
+{
+  "notes": {
+    "403": {
+      "vault": {
+        "fsPath": "vault"
+      },
+      "fname": "403",
+      "id": "403",
+      "title": "This page has not yet sprouted",
+      "schemaStub": false,
+      "type": "note",
+      "updated": 1663828459887,
+      "created": 1663828459887,
+      "desc": "",
+      "links": [],
+      "anchors": {},
+      "children": [],
+      "parent": null,
+      "data": {}
+    },
+    "2ajryvqow43elplox2nvgt0": {
+      "id": "2ajryvqow43elplox2nvgt0",
+      "title": "Hello Visitor",
+      "desc": "",
+      "updated": 1661772283606,
+      "created": 1648766726999,
+      "custom": {
+        "nav_order": 0,
+        "permalink": "/"
+      },
+      "fname": "root",
+      "type": "note",
+      "vault": {
+        "fsPath": "vault"
+      },
+      "contentHash": "fb58128cb062cae72be31155f03654c1",
+      "links": [],
+      "anchors": {
+        "stay-a-while-and-listen": {
+          "type": "header",
+          "text": "Stay a while and listen",
+          "value": "stay-a-while-and-listen",
+          "line": 7,
+          "column": 0,
+          "depth": 1
+        },
+        "lookup": {
+          "type": "header",
+          "text": "Lookup",
+          "value": "lookup",
+          "line": 17,
+          "column": 0,
+          "depth": 2
+        }
+      },
+      "children": [
+        "kmodkqrr8soyq59b5twkopo",
+        "cj841uoi4a89gvhzf6qss2u"
+      ],
+      "parent": null,
+      "data": {}
+    },
+    "cj841uoi4a89gvhzf6qss2u": {
+      "fname": "Notes from the field",
+      "stub": true,
+      "vault": {
+        "fsPath": "vault"
+      },
+      "schemaStub": false,
+      "type": "note",
+      "updated": 1663828459786,
+      "created": 1663828459786,
+      "id": "cj841uoi4a89gvhzf6qss2u",
+      "desc": "",
+      "links": [],
+      "anchors": {},
+      "children": [
+        "suyvdgeyipdebxr61uoo1xd",
+        "ispyuxecejflrr2t0trxrmg"
+      ],
+      "parent": "2ajryvqow43elplox2nvgt0",
+      "data": {},
+      "title": "Notes from the field"
+    },
+    "ispyuxecejflrr2t0trxrmg": {
+      "id": "ispyuxecejflrr2t0trxrmg",
+      "title": "powershell",
+      "desc": "",
+      "updated": 1663828031394,
+      "created": 1663743363872,
+      "custom": {},
+      "fname": "Notes from the field.powershell",
+      "type": "note",
+      "vault": {
+        "fsPath": "vault"
+      },
+      "contentHash": "8ab6c4775c4494b03b83a455968368a9",
+      "links": [],
+      "anchors": {
+        "internal-optimization": {
+          "type": "header",
+          "text": "internal optimization",
+          "value": "internal-optimization",
+          "line": 8,
+          "column": 0,
+          "depth": 2
+        }
+      },
+      "children": [],
+      "parent": "cj841uoi4a89gvhzf6qss2u",
+      "data": {}
+    },
+    "suyvdgeyipdebxr61uoo1xd": {
+      "id": "suyvdgeyipdebxr61uoo1xd",
+      "title": "csharp",
+      "desc": "",
+      "updated": 1663743287642,
+      "created": 1661764973049,
+      "tags": null,
+      "custom": {},
+      "fname": "Notes from the field.csharp",
+      "type": "note",
+      "vault": {
+        "fsPath": "vault"
+      },
+      "contentHash": "29eb0196263bea3e78ee7df929205be6",
+      "links": [],
+      "anchors": {},
+      "children": [],
+      "parent": "cj841uoi4a89gvhzf6qss2u",
+      "data": {}
+    },
+    "kmodkqrr8soyq59b5twkopo": {
+      "id": "kmodkqrr8soyq59b5twkopo",
+      "title": "Recommendations",
+      "desc": "",
+      "updated": 1662234666473,
+      "created": 1651332275798,
+      "custom": {},
+      "fname": "Recommendations",
+      "type": "note",
+      "vault": {
+        "fsPath": "vault"
+      },
+      "contentHash": "66de288fb2de10d355318c530484543a",
+      "links": [],
+      "anchors": {
+        "empfehlungen": {
+          "type": "header",
+          "text": "Empfehlungen",
+          "value": "empfehlungen",
+          "line": 8,
+          "column": 0,
+          "depth": 2
+        },
+        "bücher": {
+          "type": "header",
+          "text": "Bücher",
+          "value": "bücher",
+          "line": 12,
+          "column": 0,
+          "depth": 3
+        },
+        "talks": {
+          "type": "header",
+          "text": "Talks",
+          "value": "talks",
+          "line": 30,
+          "column": 0,
+          "depth": 3
+        },
+        "verschiedenes": {
+          "type": "header",
+          "text": "verschiedenes",
+          "value": "verschiedenes",
+          "line": 37,
+          "column": 0,
+          "depth": 3
+        }
+      },
+      "children": [],
+      "parent": "2ajryvqow43elplox2nvgt0",
+      "data": {}
+    }
+  },
+  "domains": [
+    {
+      "id": "2ajryvqow43elplox2nvgt0",
+      "title": "Hello Visitor",
+      "desc": "",
+      "updated": 1661772283606,
+      "created": 1648766726999,
+      "custom": {
+        "nav_order": 0,
+        "permalink": "/"
+      },
+      "fname": "root",
+      "type": "note",
+      "vault": {
+        "fsPath": "vault"
+      },
+      "contentHash": "fb58128cb062cae72be31155f03654c1",
+      "links": [],
+      "anchors": {
+        "stay-a-while-and-listen": {
+          "type": "header",
+          "text": "Stay a while and listen",
+          "value": "stay-a-while-and-listen",
+          "line": 7,
+          "column": 0,
+          "depth": 1
+        },
+        "lookup": {
+          "type": "header",
+          "text": "Lookup",
+          "value": "lookup",
+          "line": 17,
+          "column": 0,
+          "depth": 2
+        }
+      },
+      "children": [
+        "kmodkqrr8soyq59b5twkopo",
+        "cj841uoi4a89gvhzf6qss2u"
+      ],
+      "parent": null,
+      "data": {},
+      "body": "# Stay a while and listen\n\nAwesome, right? Even better, you can hire me. But don't get too excited yet.\nI may have not seen much of the IT Industry yet, but what I've seen so far was dissapointing.\nI want a place and colleagues from which I can learn at the job.\nI want to work with people who are interested and don't reject everything with \"I don't have time for that\".\nI'm sick of wasting my time Google bungling, because no one has a clue what we're doing and is stuck in ancient Times.\n\n\n\n## Lookup\n\nThis section contains useful links to related resources.\n\n- [Github](https://github.com/Mettcon)\n- Discord: Saine#4136\n\n\n"
+    }
+  ],
+  "noteIndex": {
+    "id": "2ajryvqow43elplox2nvgt0",
+    "title": "Hello Visitor",
+    "desc": "",
+    "updated": 1661772283606,
+    "created": 1648766726999,
+    "custom": {
+      "nav_order": 0,
+      "permalink": "/"
+    },
+    "fname": "root",
+    "type": "note",
+    "vault": {
+      "fsPath": "vault"
+    },
+    "contentHash": "fb58128cb062cae72be31155f03654c1",
+    "links": [],
+    "anchors": {
+      "stay-a-while-and-listen": {
+        "type": "header",
+        "text": "Stay a while and listen",
+        "value": "stay-a-while-and-listen",
+        "line": 7,
+        "column": 0,
+        "depth": 1
+      },
+      "lookup": {
+        "type": "header",
+        "text": "Lookup",
+        "value": "lookup",
+        "line": 17,
+        "column": 0,
+        "depth": 2
+      }
+    },
+    "children": [
+      "kmodkqrr8soyq59b5twkopo",
+      "cj841uoi4a89gvhzf6qss2u"
+    ],
+    "parent": null,
+    "data": {},
+    "body": "# Stay a while and listen\n\nAwesome, right? Even better, you can hire me. But don't get too excited yet.\nI may have not seen much of the IT Industry yet, but what I've seen so far was dissapointing.\nI want a place and colleagues from which I can learn at the job.\nI want to work with people who are interested and don't reject everything with \"I don't have time for that\".\nI'm sick of wasting my time Google bungling, because no one has a clue what we're doing and is stuck in ancient Times.\n\n\n\n## Lookup\n\nThis section contains useful links to related resources.\n\n- [Github](https://github.com/Mettcon)\n- Discord: Saine#4136\n\n\n"
+  },
+  "vaults": [
+    {
+      "fsPath": "vault"
+    }
+  ]
+}

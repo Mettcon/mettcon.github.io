@@ -1,0 +1,69 @@
+<h1 id="csharp"><a aria-hidden="true" class="anchor-heading" href="#csharp"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>csharp</h1>
+<h2 id="using-statement"><a aria-hidden="true" class="anchor-heading" href="#using-statement"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>using statement</h2>
+<p>recently I stumbled upon a code snippet like this</p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token keyword">var</span> rollbackProcess
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">SPWeb</span> process <span class="token operator">=</span> someSite<span class="token punctuation">.</span><span class="token function">Openweb</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// prepare Rollback</span>
+        rollbackProcess <span class="token operator">=</span> process
+        
+        <span class="token comment">//... some code here</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span>
+    <span class="token comment">// rollback</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><code>The using declaration calls the Dispose method on the object in the correct way when it goes out of scope. The using statement causes the object itself to go out of scope as soon as Dispose is called.</code></p>
+<p>If you dispose an object manually you should(must?) remove the reference with assigning a new value to "unchain" it and make it free for the GC to collect.
+Mostly this looks like this</p>
+<pre class="language-csharp"><code class="language-csharp">process<span class="token punctuation">.</span><span class="token function">dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+process <span class="token operator">=</span> <span class="token keyword">null</span>
+</code></pre>
+<p>but <code>using</code> is only aware of <code>process</code>, which means the object is still referenced in <code>rollbackProcess</code> and therefore, will never be disposed.</p>
+<h3 id="solution"><a aria-hidden="true" class="anchor-heading" href="#solution"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Solution</h3>
+<p>How do we solve the problem?<br>
+In this case, the developer just turned <code>rollbackProcess = process</code> into <code>rollbackProcessURL = process.URL</code> which is a <code>string</code> Type and it did the Trick.<br>
+I'm not sure <code>rollbackProcessURL</code> is still a reference to the <code>URL</code> Property of <code>process</code> and I don't know how to check that and if that works in other cases.  </p>
+<p>For better solutions it may help us to understand what's going on.
+Sharplab shows us that <code>using</code>s are nothing more than a <code>try{} finally{}</code> </p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">C</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">M</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">Person</span> Demo <span class="token operator">=</span> <span class="token keyword">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>Demo<span class="token punctuation">.</span>Name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>get's lowered to</p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">C</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">M</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name">Person</span> person <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span>
+        <span class="token punctuation">{</span>
+            Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>person<span class="token punctuation">.</span>Name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">finally</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>person <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token punctuation">(</span><span class="token punctuation">(</span>IDisposable<span class="token punctuation">)</span>person<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>which means we can use the example above to this</p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token class-name">SPWeb</span> process <span class="token operator">=</span> <span class="token keyword">null</span>
+<span class="token keyword">try</span> <span class="token punctuation">{</span>   
+    someSite<span class="token punctuation">.</span><span class="token function">Openweb</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">//... some code here</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">{</span>
+    <span class="token comment">// rollback</span>
+<span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+    <span class="token comment">// this is the new way to do</span>
+    <span class="token comment">// if (process){ process.Dispose }</span>
+    process<span class="token punctuation">?.</span><span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
