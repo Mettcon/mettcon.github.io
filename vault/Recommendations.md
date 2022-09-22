@@ -2,7 +2,7 @@
 id: kmodkqrr8soyq59b5twkopo
 title: Recommendations
 desc: ''
-updated: 1660911821107
+updated: 1662234666473
 created: 1651332275798
 ---
 
@@ -12,8 +12,8 @@ You can just buy these, or research a bit. I don't care
 
 ### Bücher
 
-No longer Human
-alles von Charles Bukowski
+No longer Human  
+alles von Charles Bukowski  
 Phönix Project  
 Shell of an idea  
 Komisch, alles chemisch!  

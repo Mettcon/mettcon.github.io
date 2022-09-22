@@ -2,7 +2,7 @@
 id: suyvdgeyipdebxr61uoo1xd
 title: csharp
 desc: ''
-updated: 1662229120041
+updated: 1663743287642
 created: 1661764973049
 tags: #using #dispose #garbage collector
 ---
@@ -80,6 +80,8 @@ try {
 } catch {
     // rollback
 } finally {
+    // this is the new way to do
+    // if (process){ process.Dispose }
     process?.Dispose()
 }
 ```
