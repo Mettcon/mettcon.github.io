@@ -1,0 +1,7 @@
+[
+  { "title": "root",            "file": "root.md" },
+  { "title": "CV",              "file": "resume.md"   },
+  { "title": "recommendations", "file": "recommendations.md" },
+  { "title": "notes",           "file": "notes.md" },
+  { "title": "learning",        "file": "learning.md" }
+]

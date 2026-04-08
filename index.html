@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs</title>
+
+  <!-- Markdown renderer — the only external dependency -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap');
+
+    /* ── Tokens ─────────────────────────────────────────────── */
+    :root {
+      --bg:          #0f1117;
+      --surface:     #13161e;
+      --surface-2:   #1a1f2e;   /* navigation hover background */
+      --border:      #252a38;   
+      --text:        #d4daf0;
+      --muted:       #5a6380;
+      --accent:      #7b93ff;
+      --accent-dim:  #3d4f99;
+      --code-bg:     #1a1f2e;
+      --sidebar-w:   260px;
+      --toc-w:       220px;
+      --header-h:    52px;
+      --font-mono:   'IBM Plex Mono', monospace;
+      --font-body:   'Source Serif 4', serif;
+    }
+
+    /* ── Reset ───────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Top bar ─────────────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 1.25rem;
+      z-index: 100;
+      gap: 1rem;
+    }
+    .site-title {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .site-title::before { content: '~/'; color: var(--muted); }
+
+    /* ── Layout shell ────────────────────────────────────────── */
+    .shell {
+      display: flex;
+      margin-top: var(--header-h);
+      min-height: calc(100vh - var(--header-h));
+    }
+
+    /* ── Left nav ────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      width: var(--sidebar-w);
+      height: calc(100vh - var(--header-h));
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 1.25rem 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .nav-section-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.5rem 1.25rem 0.35rem;
+    }
+    .nav-link {
+      display: block;
+      padding: 0.42rem 1.25rem 0.42rem 1.1rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .nav-link:hover {
+      color: var(--text);
+      background: var(--surface-2);
+    }
+    .nav-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+    }
+
+    /* ── Main content ────────────────────────────────────────── */
+    main {
+      margin-left: var(--sidebar-w);
+      margin-right: var(--toc-w);
+      padding: 3rem 3.5rem 5rem;
+      max-width: 780px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    /* ── Prose styles ────────────────────────────────────────── */
+    #content h1, #content h2, #content h3,
+    #content h4, #content h5, #content h6 {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      line-height: 1.3;
+      color: #eef1ff;
+    }
+    #content h1 { font-size: 1.9rem;  margin: 0 0 1.5rem; }
+    #content h2 { font-size: 1.2rem;  margin: 2.5rem 0 0.9rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+    #content h3 { font-size: 1rem;    margin: 1.8rem 0 0.6rem; color: var(--accent); }
+    #content h4 { font-size: 0.88rem; margin: 1.4rem 0 0.5rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    #content p  { margin: 0 0 1rem; }
+    #content ul, #content ol { margin: 0 0 1rem 1.4rem; }
+    #content li { margin-bottom: 0.3rem; }
+    #content li p { margin: 0; }
+    #content blockquote {
+      border-left: 3px solid var(--accent-dim);
+      padding: 0.6rem 1rem;
+      margin: 1.2rem 0;
+      color: var(--muted);
+      font-style: italic;
+      background: var(--surface-2);
+      border-radius: 0 4px 4px 0;
+    }
+    #content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); transition: border-color 0.15s; }
+    #content a:hover { border-bottom-color: var(--accent); }
+
+    #content code {
+      font-family: var(--font-mono);
+      font-size: 0.82em;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1em 0.4em;
+      color: #c9d1ff;
+    }
+    #content pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0 1.4rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    #content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.83rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    #content table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1.2rem 0 1.6rem;
+    }
+    #content th, #content td {
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.9rem;
+      text-align: left;
+    }
+    #content th {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      background: var(--surface-2);
+      color: var(--muted);
+    }
+    #content tr:nth-child(even) td { background: color-mix(in srgb, var(--surface-2) 40%, transparent); }
+    #content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    /* ── Right ToC ───────────────────────────────────────────── */
+    aside {
+      position: fixed;
+      top: var(--header-h);
+      right: 0;
+      width: var(--toc-w);
+      height: calc(100vh - var(--header-h));
+      padding: 1.5rem 1rem 1.5rem 0.75rem;
+      overflow-y: auto;
+      border-left: 1px solid var(--border);
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .toc-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      padding-left: 0.5rem;
+    }
+    .toc-link {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      line-height: 1.4;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.28rem 0.5rem;
+      border-radius: 3px;
+      border-left: 2px solid transparent;
+      transition: color 0.12s, background 0.12s, border-color 0.12s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .toc-link:hover { color: var(--text); background: var(--surface-2); }
+    .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+    .toc-link[data-level="2"] { padding-left: 0.5rem; }
+    .toc-link[data-level="3"] { padding-left: 1.2rem; font-size: 0.68rem; }
+    .toc-link[data-level="4"] { padding-left: 1.9rem; font-size: 0.65rem; opacity: 0.75; }
+
+    /* ── Loading / empty states ──────────────────────────────── */
+    .placeholder {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 2rem 0;
+    }
+
+    /* ── Scrollbars (webkit) ─────────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="site-title" href="#" id="home-link">docs</a>
+</header>
+
+<div class="shell">
+  <nav id="nav">
+    <div class="nav-section-label">Pages</div>
+    <!-- filled by JS -->
+  </nav>
+
+  <main>
+    <div id="content">
+      <p class="placeholder">Loading…</p>
+    </div>
+  </main>
+
+  <aside id="toc-panel">
+    <div class="toc-label">On this page</div>
+    <div id="toc">
+      <!-- filled by JS -->
+    </div>
+  </aside>
+</div>
+
+<script>
+  /* ── Config ──────────────────────────────────────────────────
+     Change PAGES_FILE to point at your pages.json if needed.  */
+  const PAGES_FILE = 'pages.json';
+
+  /* ── State ───────────────────────────────────────────────── */
+  let pages   = [];
+  let current = null;
+  let tocObserver = null;
+
+  /* ── Boot ────────────────────────────────────────────────── */
+  async function init() {
+    try {
+      const res = await fetch(PAGES_FILE);
+      if (!res.ok) throw new Error(`Could not load ${PAGES_FILE}`);
+      pages = await res.json();
+    } catch (e) {
+      document.getElementById('content').innerHTML =
+        `<p class="placeholder">⚠ ${e.message}</p>`;
+      return;
+    }
+
+    buildNav();
+
+    // Route from hash or load first page
+    const hash = decodeURIComponent(location.hash.slice(1));
+    const target = pages.find(p => p.file === hash) || pages[0];
+    if (target) navigate(target.file, false);
+
+    window.addEventListener('hashchange', () => {
+      const f = decodeURIComponent(location.hash.slice(1));
+      const p = pages.find(x => x.file === f);
+      if (p && p.file !== current) navigate(p.file, false);
+    });
+  }
+
+  /* ── Nav ─────────────────────────────────────────────────── */
+  function buildNav() {
+    const nav = document.getElementById('nav');
+    nav.innerHTML = '<div class="nav-section-label">Pages</div>';
+    pages.forEach(p => {
+      const a = document.createElement('a');
+      a.className = 'nav-link';
+      a.href = `#${encodeURIComponent(p.file)}`;
+      a.textContent = p.title;
+      a.dataset.file = p.file;
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        navigate(p.file);
+      });
+      nav.appendChild(a);
+    });
+  }
+
+  function setActiveNav(file) {
+    document.querySelectorAll('.nav-link').forEach(a => {
+      a.classList.toggle('active', a.dataset.file === file);
+    });
+  }
+
+  /* ── Page load ───────────────────────────────────────────── */
+  async function navigate(file, pushHash = true) {
+    if (file === current) return;
+    current = file;
+    setActiveNav(file);
+    if (pushHash) history.pushState(null, '', `#${encodeURIComponent(file)}`);
+
+    document.getElementById('content').innerHTML =
+      '<p class="placeholder">Loading…</p>';
+    document.getElementById('toc').innerHTML = '';
+
+    let md;
+    try {
+      const res = await fetch(file);
+      if (!res.ok) throw new Error(`404 — ${file}`);
+      md = await res.text();
+    } catch (e) {
+      document.getElementById('content').innerHTML =
+        `<p class="placeholder">⚠ ${e.message}</p>`;
+      return;
+    }
+
+    renderPage(md);
+  }
+
+  /* ── Render ──────────────────────────────────────────────── */
+  function renderPage(md) {
+    const content = document.getElementById('content');
+
+    // Parse & render markdown
+    content.innerHTML = marked.parse(md);
+
+    // Attach IDs to headings so ToC links work
+    content.querySelectorAll('h1,h2,h3,h4').forEach(h => {
+      if (!h.id) {
+        h.id = slugify(h.textContent);
+      }
+    });
+
+    buildToc(content);
+    window.scrollTo(0, 0);
+  }
+
+  /* ── ToC ─────────────────────────────────────────────────── */
+  function buildToc(content) {
+    const toc  = document.getElementById('toc');
+    toc.innerHTML = '';
+
+    const headings = [...content.querySelectorAll('h1,h2,h3,h4')];
+    if (headings.length === 0) return;
+
+    headings.forEach(h => {
+      const level = parseInt(h.tagName[1]);
+      const a = document.createElement('a');
+      a.className = 'toc-link';
+      a.href = `#${h.id}`;
+      a.textContent = h.textContent;
+      a.dataset.level = level;
+      a.dataset.target = h.id;
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      toc.appendChild(a);
+    });
+
+    setupTocObserver(headings);
+  }
+
+  function setupTocObserver(headings) {
+    if (tocObserver) tocObserver.disconnect();
+
+    const links = document.querySelectorAll('.toc-link');
+
+    tocObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.toggle(
+            'active', l.dataset.target === entry.target.id
+          ));
+        }
+      });
+    }, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
+
+    headings.forEach(h => tocObserver.observe(h));
+  }
+
+  /* ── Util ────────────────────────────────────────────────── */
+  function slugify(text) {
+    return text.toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .trim()
+      .replace(/[\s_]+/g, '-');
+  }
+
+  /* ── Go ──────────────────────────────────────────────────── */
+  init();
+</script>
+</body>
+</html>
