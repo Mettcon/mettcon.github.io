@@ -5,11 +5,11 @@
 recently I stumbled upon a code snippet like this
 
 ```csharp
-SPWeb rollbackProcess
+SPWeb rollbackProcess;
 try {
     using (SPWeb process = someSite.Openweb() ) {
         // prepare Rollback
-        rollbackProcess = process
+        rollbackProcess = process;
         
         //... some code here
     }

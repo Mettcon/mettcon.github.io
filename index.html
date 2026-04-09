@@ -7,8 +7,12 @@
   <title>Mettcons Page</title>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-asm6502.min.js"></script>
+  <!-- add more as needed from cdnjs.com/libraries/prism -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 
 
   <style>
@@ -422,12 +426,13 @@
     /* ── highlight.js + marked wiring ────────────────────────── */
     const renderer = new marked.Renderer();
     renderer.code = function ({ text, lang }) {
-      if (lang && hljs.getLanguage(lang)) {
-        const highlighted = hljs.highlight(text, { language: lang }).value;
-        return `<pre><code class="hljs language-${lang}">${highlighted}</code></pre>`;
+      const grammar = lang && Prism.languages[lang];
+      if (grammar) {
+        const highlighted = Prism.highlight(text, grammar, lang);
+        return `<pre class="language-${lang}"><code class="language-${lang}">${highlighted}</code></pre>`;
       }
-      const highlighted = hljs.highlightAuto(text).value;
-      return `<pre><code class="hljs">${highlighted}</code></pre>`;
+      // No language or unrecognised — return plain, unstyled
+      return `<pre><code>${text}</code></pre>`;
     };
     marked.use({ renderer });
 
