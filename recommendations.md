@@ -1,3 +1,4 @@
+# Recommendations
 ## General
 This stuff I recommend for everyone regardless of interest.
 
@@ -5,4 +6,4 @@ This stuff I recommend for everyone regardless of interest.
 - [DEFCON 19: Steal Everything, Kill Everyone, Cause Total Financial Ruin! (w speaker)](https://www.youtube.com/watch?v=JsVtHqICeKE)
 - https://www.reddit.com/r/linux/comments/1rtd51g/update_i_pulled_irs_filings_for_the_org_that/
 
-DEFCON 19: Steal Everything, Kill Everyone, Cause Total Financial Ruin! (w speaker)
+
